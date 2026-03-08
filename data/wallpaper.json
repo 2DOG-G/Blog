@@ -1,10 +1,66 @@
 [
-    {
-        "title": "准备就绪",
-        "description": "GitHub Actions 工作流已启用。每天 UTC 0:00 (北京时间 08:00) 自动更新。你也可以在 Actions 选项卡手动执行工作流以立即获取最新图片。",
-        "image_url": "https://www.bing.com/th?id=OHR.Kungsang_ZH-CN2858066230_1920x1080.jpg",
-        "hd_url": "https://www.bing.com/th?id=OHR.Kungsang_ZH-CN2858066230_UHD.jpg",
-        "date": "20240308",
-        "fetch_time": "2024-03-08T00:00:00"
-    }
+  {
+    "title": "节约日光的艺术",
+    "description": "乌尔姆市政厅的天文钟, 德国 (© Tomekbudujedomek/Getty Images)",
+    "image_url": "https://www.bing.com/th?id=OHR.UlmClock_ZH-CN9282560066_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.UlmClock_ZH-CN9282560066_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260307",
+    "fetch_time": "2026-03-08T05:37:07.116610"
+  },
+  {
+    "title": "治愈、宁静且充满希望",
+    "description": "布罗肯峰的日出, 哈尔茨国家公园, 德国 (© imageBROKER/AVTG/Getty Images)",
+    "image_url": "https://www.bing.com/th?id=OHR.BrockenSunrise_ZH-CN4930790850_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.BrockenSunrise_ZH-CN4930790850_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260306",
+    "fetch_time": "2026-03-08T05:37:07.116618"
+  },
+  {
+    "title": "混凝土中铸造的波浪",
+    "description": "波浪住宅楼, 瓦埃勒, 丹麦 (© Frank Bach/Alamy)",
+    "image_url": "https://www.bing.com/th?id=OHR.WaveDenmark_ZH-CN8825888678_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.WaveDenmark_ZH-CN8825888678_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260305",
+    "fetch_time": "2026-03-08T05:37:07.116620"
+  },
+  {
+    "title": "古老岩石，现代灯光",
+    "description": "格雷梅的傍晚, 卡帕多西亚, 土耳其 (© ONNAJA/Getty Images)",
+    "image_url": "https://www.bing.com/th?id=OHR.GoremeTwilight_ZH-CN3731931947_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.GoremeTwilight_ZH-CN3731931947_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260304",
+    "fetch_time": "2026-03-08T05:37:07.116622"
+  },
+  {
+    "title": "聚光灯下的番红花",
+    "description": "紫番红花, 里拉七湖, 保加利亚 (© Maya Karkalicheva/Getty Images)",
+    "image_url": "https://www.bing.com/th?id=OHR.RilaCrocuses_ZH-CN3650360951_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.RilaCrocuses_ZH-CN3650360951_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260303",
+    "fetch_time": "2026-03-08T05:37:07.116624"
+  },
+  {
+    "title": "花灯映月，团圆吉祥",
+    "description": "元宵节期间悬挂的宫灯，北京自贡灯会现场，北京，中国 (© Grisha Bruev/Shutterstock)",
+    "image_url": "https://www.bing.com/th?id=OHR.LanternFestivalY26_ZH-CN9186685796_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.LanternFestivalY26_ZH-CN9186685796_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260302",
+    "fetch_time": "2026-03-08T05:37:07.116625"
+  },
+  {
+    "title": "漂浮的传承",
+    "description": "苏梅岛的港口和长尾船, 泰国 (© Foto2rich/Shutterstock)",
+    "image_url": "https://www.bing.com/th?id=OHR.SamuiThailand_ZH-CN3323790951_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.SamuiThailand_ZH-CN3323790951_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260301",
+    "fetch_time": "2026-03-08T05:37:07.116627"
+  },
+  {
+    "title": "每一步，都是传承",
+    "description": "伊维萨岛, 巴利阿里群岛, 西班牙 (© tokar/Shutterstock)",
+    "image_url": "https://www.bing.com/th?id=OHR.BalearesDay_ZH-CN5024902433_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "hd_url": "https://www.bing.com/th?id=OHR.BalearesDay_ZH-CN5024902433_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+    "date": "20260228",
+    "fetch_time": "2026-03-08T05:37:07.116631"
+  }
 ]

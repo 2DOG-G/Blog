@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bing每日一图</title>
+    <title>Bing 每日一图</title>
     <style>
         * {
             margin: 0;
@@ -13,28 +13,31 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
 
         .container {
+            width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
         }
 
         header {
             text-align: center;
             color: white;
             margin-bottom: 40px;
-            animation: fadeInDown 0.6s ease-out;
+            margin-top: 20px;
         }
 
         header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         header p {
@@ -44,121 +47,53 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            animation: fadeInUp 0.6s ease-out;
+            margin-bottom: 40px;
         }
 
-        .image-card {
+        .card {
             background: white;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
         }
 
-        .image-card:hover {
+        .card:hover {
             transform: translateY(-8px);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .image-container {
-            position: relative;
-            padding-bottom: 66.67%;
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             overflow: hidden;
-            background: #f0f0f0;
+            position: relative;
         }
 
-        .image-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .card-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
+            display: block;
         }
 
-        .image-card:hover .image-container img {
-            transform: scale(1.05);
-        }
-
-        .image-date {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-        }
-
-        .image-info {
-            padding: 20px;
-            flex: 1;
+        .card-image.loading {
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .image-title {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .image-copyright {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 12px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            flex: 1;
-        }
-
-        .image-link {
-            font-size: 0.85em;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .image-link:hover {
-            color: #764ba2;
-        }
-
-        .loading {
-            text-align: center;
-            color: white;
-            font-size: 1.2em;
-            padding: 40px;
-        }
-
-        .loading-spinner {
-            display: inline-block;
+        .spinner {
             width: 40px;
             height: 40px;
             border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top: 4px solid white;
+            border-top-color: white;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 15px;
-            vertical-align: middle;
+            animation: spin 0.8s linear infinite;
         }
 
         @keyframes spin {
@@ -167,44 +102,128 @@
             }
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .card-content {
+            padding: 20px;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+        .card-date {
+            font-size: 0.85em;
+            color: #999;
+            margin-bottom: 8px;
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .card-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-description {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            max-height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .card-link {
+            flex: 1;
+            padding: 8px 12px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .card-link.view {
+            background: #667eea;
+            color: white;
+        }
+
+        .card-link.view:hover {
+            background: #5568d3;
+        }
+
+        .card-link.download {
+            background: #764ba2;
+            color: white;
+        }
+
+        .card-link.download:hover {
+            background: #63408a;
+        }
+
+        .loading-section {
+            text-align: center;
+            color: white;
+            padding: 40px;
+        }
+
+        .error {
+            background: #ff6b6b;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         .empty-state {
             text-align: center;
             color: white;
-            padding: 60px 20px;
+            padding: 40px;
         }
 
-        .empty-state h2 {
-            font-size: 2em;
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
             margin-bottom: 20px;
+            opacity: 0.5;
         }
 
-        .empty-state p {
-            font-size: 1.1em;
-            opacity: 0.9;
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .refresh-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .refresh-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .refresh-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
         @media (max-width: 768px) {
@@ -215,13 +234,10 @@
             .gallery {
                 grid-template-columns: 1fr;
             }
-        }
 
-        .last-updated {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9em;
-            margin-top: 30px;
+            .card-links {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -229,146 +245,128 @@
 <body>
     <div class="container">
         <header>
-            <h1>🖼️ Bing每日一图</h1>
-            <p>每天为你展示Bing精美壁纸</p>
+            <h1>🖼️ Bing 每日一图</h1>
+            <p>每天更新来自全球的精美背景图片</p>
         </header>
 
-        <div id="content">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                加载中...
+        <div style="text-align: center; margin-bottom: 30px;">
+            <button class="refresh-btn" onclick="loadWallpapers()">🔄 刷新</button>
+        </div>
+
+        <div id="error-container"></div>
+        <div id="gallery" class="gallery">
+            <div class="loading-section">
+                <div class="spinner"></div>
+                <p>加载中...</p>
             </div>
         </div>
 
-        <div class="last-updated" id="lastUpdated"></div>
+        <footer>
+            <p>© 2024 Bing Daily Wallpaper | 数据来源：微软 Bing</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">自动更新于每天 UTC 0:00 (北京时间 08:00)</p>
+        </footer>
     </div>
 
     <script>
-        async function loadImages() {
+        async function loadWallpapers() {
+            const gallery = document.getElementById('gallery');
+            const errorContainer = document.getElementById('error-container');
+
+            // 清空错误信息
+            errorContainer.innerHTML = '';
+
+            // 显示加载状态
+            gallery.innerHTML = `
+                <div class="loading-section" style="grid-column: 1 / -1;">
+                    <div class="spinner"></div>
+                    <p>加载中...</p>
+                </div>
+            `;
+
             try {
-                const response = await fetch('./data/bing-images.json');
+                const response = await fetch('data/wallpaper.json');
+
                 if (!response.ok) {
-                    throw new Error('无法加载图片数据');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                const images = await response.json();
+                const wallpapers = await response.json();
 
-                if (images.length === 0) {
-                    showEmptyState();
+                if (!wallpapers || wallpapers.length === 0) {
+                    gallery.innerHTML = `
+                        <div class="empty-state" style="grid-column: 1 / -1;">
+                            <p>暂无数据，请稍后再试</p>
+                        </div>
+                    `;
                     return;
                 }
 
-                displayImages(images);
-                updateLastUpdated(images[0].date);
+                // 渲染卡片
+                gallery.innerHTML = wallpapers.map((wallpaper, index) => `
+                    <div class="card">
+                        <div class="card-image loading">
+                            <img 
+                                src="${wallpaper.image_url}" 
+                                alt="${wallpaper.title}"
+                                onload="this.parentElement.classList.remove('loading')"
+                                onerror="this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; this.style.display='none';"
+                            />
+                        </div>
+                        <div class="card-content">
+                            <div class="card-date">${formatDate(wallpaper.date)}</div>
+                            <div class="card-title">${escapeHtml(wallpaper.title)}</div>
+                            <div class="card-description">${escapeHtml(wallpaper.description)}</div>
+                            <div class="card-links">
+                                <a href="${wallpaper.image_url}" target="_blank" class="card-link view">
+                                    👁️ 查看
+                                </a>
+                                <a href="${wallpaper.hd_url}" download class="card-link download">
+                                    ⬇️ 下载
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
             } catch (error) {
                 console.error('加载失败:', error);
-                showError(error.message);
+                errorContainer.innerHTML = `
+                    <div class="error">
+                        ⚠️ 加载失败: ${error.message}
+                        <br/>
+                        <small>请确保 data/wallpaper.json 文件存在</small>
+                    </div>
+                `;
+                gallery.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <p>加载失败，请检查数据文件</p>
+                    </div>
+                `;
             }
-        }
-
-        function displayImages(images) {
-            const gallery = document.createElement('div');
-            gallery.className = 'gallery';
-
-            images.forEach(image => {
-                const card = createImageCard(image);
-                gallery.appendChild(card);
-            });
-
-            const content = document.getElementById('content');
-            content.innerHTML = '';
-            content.appendChild(gallery);
-        }
-
-        function createImageCard(image) {
-            const card = document.createElement('div');
-            card.className = 'image-card';
-
-            const imageContainer = document.createElement('div');
-            imageContainer.className = 'image-container';
-
-            const img = document.createElement('img');
-            img.src = image.url;
-            img.alt = image.title;
-            img.loading = 'lazy';
-
-            const dateTag = document.createElement('div');
-            dateTag.className = 'image-date';
-            dateTag.textContent = formatDate(image.date);
-
-            const info = document.createElement('div');
-            info.className = 'image-info';
-
-            const title = document.createElement('div');
-            title.className = 'image-title';
-            title.textContent = image.title;
-
-            const copyright = document.createElement('div');
-            copyright.className = 'image-copyright';
-            copyright.textContent = image.copyright;
-
-            const link = document.createElement('a');
-            link.className = 'image-link';
-            link.href = image.link || '#';
-            link.target = '_blank';
-            link.textContent = '了解更多 →';
-
-            imageContainer.appendChild(img);
-            imageContainer.appendChild(dateTag);
-            info.appendChild(title);
-            info.appendChild(copyright);
-            info.appendChild(link);
-            card.appendChild(imageContainer);
-            card.appendChild(info);
-
-            return card;
         }
 
         function formatDate(dateStr) {
-            const date = new Date(dateStr);
-            const today = new Date();
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-
-            if (dateStr === today.toISOString().split('T')[0]) {
-                return '今天';
-            } else if (dateStr === yesterday.toISOString().split('T')[0]) {
-                return '昨天';
-            } else {
-                return dateStr;
-            }
+            if (!dateStr) return '日期未知';
+            const year = dateStr.slice(0, 4);
+            const month = dateStr.slice(4, 6);
+            const day = dateStr.slice(6, 8);
+            return `${year}年${month}月${day}日`;
         }
 
-        function updateLastUpdated(date) {
-            const element = document.getElementById('lastUpdated');
-            element.textContent = `最后更新: ${date}`;
+        function escapeHtml(text) {
+            if (!text) return '';
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
         }
 
-        function showEmptyState() {
-            const content = document.getElementById('content');
-            content.innerHTML = `
-                <div class="empty-state">
-                    <h2>💭 暂无数据</h2>
-                    <p>图片还在抓取中，请稍后再试</p>
-                </div>
-            `;
-        }
-
-        function showError(message) {
-            const content = document.getElementById('content');
-            content.innerHTML = `
-                <div class="empty-state">
-                    <h2>❌ 出错了</h2>
-                    <p>${message}</p>
-                </div>
-            `;
-        }
-
-        // 页面加载时获取图片
-        loadImages();
-
-        // 每5分钟刷新一次数据
-        setInterval(loadImages, 5 * 60 * 1000);
+        // 页面加载时获取数据
+        loadWallpapers();
     </script>
 </body>
 

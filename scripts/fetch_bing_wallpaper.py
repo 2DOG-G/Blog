@@ -11,8 +11,8 @@ from datetime import datetime
 def fetch_bing_wallpaper():
     """从Bing API获取每日一图信息"""
     
-    # Bing每日一图API (中国区)
-    url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN"
+    # Bing每日一图API (中国区) - 只获取当天图片
+    url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=zh-CN"
     
     try:
         response = requests.get(url, timeout=10)
@@ -42,7 +42,7 @@ def fetch_bing_wallpaper():
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(wallpapers, f, ensure_ascii=False, indent=2)
         
-        print(f"✓ 成功获取 {len(wallpapers)} 张Bing背景图片")
+        print(f"✓ 成功获取当天Bing背景图片")
         print(f"✓ 数据已保存到 {output_file}")
         
         return True

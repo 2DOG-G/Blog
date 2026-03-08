@@ -12,86 +12,166 @@
             box-sizing: border-box;
         }
 
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+        }
+
+        .background-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            z-index: 1;
         }
 
         .container {
+            position: relative;
             width: 100%;
-            max-width: 1200px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+            z-index: 2;
         }
 
         header {
             text-align: center;
             color: white;
-            margin-bottom: 40px;
-            margin-top: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
         }
 
         header h1 {
-            font-size: 2.5em;
+            font-size: 3.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         header p {
-            font-size: 1.1em;
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px 30px;
+            max-width: 500px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .info-box h2 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .info-box p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 10px;
             opacity: 0.9;
         }
 
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
+        .info-box p:last-child {
+            margin-bottom: 0;
         }
 
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 1em;
             cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .card-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .card-image.loading {
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.primary {
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: rgba(102, 126, 234, 1);
+        }
+
+        footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85em;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
 
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(102, 126, 234, 0.3);
+            border-top-color: #667eea;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -102,186 +182,120 @@
             }
         }
 
-        .card-content {
-            padding: 20px;
-        }
-
-        .card-date {
-            font-size: 0.85em;
-            color: #999;
-            margin-bottom: 8px;
-        }
-
-        .card-title {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .card-description {
-            font-size: 0.95em;
-            color: #666;
-            line-height: 1.5;
-            margin-bottom: 15px;
-            max-height: 60px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-links {
-            display: flex;
-            gap: 10px;
-        }
-
-        .card-link {
-            flex: 1;
-            padding: 8px 12px;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .card-link.view {
-            background: #667eea;
+        .error-message {
+            background: rgba(255, 107, 107, 0.9);
             color: white;
-        }
-
-        .card-link.view:hover {
-            background: #5568d3;
-        }
-
-        .card-link.download {
-            background: #764ba2;
-            color: white;
-        }
-
-        .card-link.download:hover {
-            background: #63408a;
-        }
-
-        .loading-section {
-            text-align: center;
-            color: white;
-            padding: 40px;
-        }
-
-        .error {
-            background: #ff6b6b;
-            color: white;
-            padding: 20px;
+            padding: 15px 20px;
             border-radius: 8px;
             text-align: center;
-            margin-bottom: 20px;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .empty-state {
-            text-align: center;
-            color: white;
-            padding: 40px;
-        }
-
-        .empty-state svg {
-            width: 100px;
-            height: 100px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        footer {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .refresh-btn {
-            background: white;
-            color: #667eea;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .refresh-btn:hover {
-            background: #f0f0f0;
-            transform: scale(1.05);
-        }
-
-        .refresh-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+        .date-display {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-top: 10px;
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
             header h1 {
+                font-size: 2.2em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .info-box {
+                max-width: 90%;
+                padding: 15px 20px;
+            }
+
+            .info-box h2 {
+                font-size: 1.1em;
+            }
+
+            .info-box p {
+                font-size: 0.85em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .controls {
+                gap: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
                 font-size: 1.8em;
             }
 
-            .gallery {
-                grid-template-columns: 1fr;
+            header p {
+                font-size: 0.9em;
             }
 
-            .card-links {
-                flex-direction: column;
+            .info-box {
+                padding: 12px 15px;
             }
+
+            .btn {
+                padding: 8px 16px;
+                font-size: 0.8em;
+            }
+        }
+
+        .loading-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
         }
     </style>
 </head>
 
 <body>
+    <div class="background-container" id="bgContainer">
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+    </div>
+    <div class="overlay"></div>
+
     <div class="container">
         <header>
             <h1>🖼️ Bing 每日一图</h1>
-            <p>每天更新来自全球的精美背景图片</p>
+            <p id="subtitle">加载中...</p>
         </header>
 
-        <div style="text-align: center; margin-bottom: 30px;">
-            <button class="refresh-btn" onclick="loadWallpapers()">🔄 刷新</button>
-        </div>
-
-        <div id="error-container"></div>
-        <div id="gallery" class="gallery">
-            <div class="loading-section">
+        <main id="mainContent"
+            style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <div class="loading-state">
                 <div class="spinner"></div>
-                <p>加载中...</p>
+                <p>正在加载今天的图片...</p>
             </div>
-        </div>
+        </main>
 
         <footer>
             <p>© 2024 Bing Daily Wallpaper | 数据来源：微软 Bing</p>
-            <p style="font-size: 0.9em; margin-top: 10px;">自动更新于每天 UTC 0:00 (北京时间 08:00)</p>
+            <p style="margin-top: 8px;">每天 UTC 0:00 (北京时间 08:00) 自动更新</p>
         </footer>
     </div>
 
     <script>
-        async function loadWallpapers() {
-            const gallery = document.getElementById('gallery');
-            const errorContainer = document.getElementById('error-container');
-
-            // 清空错误信息
-            errorContainer.innerHTML = '';
-
-            // 显示加载状态
-            gallery.innerHTML = `
-                <div class="loading-section" style="grid-column: 1 / -1;">
-                    <div class="spinner"></div>
-                    <p>加载中...</p>
-                </div>
-            `;
+        async function loadWallpaper() {
+            const mainContent = document.getElementById('mainContent');
+            const bgContainer = document.getElementById('bgContainer');
+            const subtitle = document.getElementById('subtitle');
 
             try {
                 const response = await fetch('data/wallpaper.json');
@@ -293,53 +307,49 @@
                 const wallpapers = await response.json();
 
                 if (!wallpapers || wallpapers.length === 0) {
-                    gallery.innerHTML = `
-                        <div class="empty-state" style="grid-column: 1 / -1;">
-                            <p>暂无数据，请稍后再试</p>
-                        </div>
-                    `;
-                    return;
+                    throw new Error('暂无数据');
                 }
 
-                // 渲染卡片
-                gallery.innerHTML = wallpapers.map((wallpaper, index) => `
-                    <div class="card">
-                        <div class="card-image loading">
-                            <img 
-                                src="${wallpaper.image_url}" 
-                                alt="${wallpaper.title}"
-                                onload="this.parentElement.classList.remove('loading')"
-                                onerror="this.parentElement.style.background='linear-gradient(135deg, #667eea 0%, #764ba2 100%)'; this.style.display='none';"
-                            />
-                        </div>
-                        <div class="card-content">
-                            <div class="card-date">${formatDate(wallpaper.date)}</div>
-                            <div class="card-title">${escapeHtml(wallpaper.title)}</div>
-                            <div class="card-description">${escapeHtml(wallpaper.description)}</div>
-                            <div class="card-links">
-                                <a href="${wallpaper.image_url}" target="_blank" class="card-link view">
-                                    👁️ 查看
-                                </a>
-                                <a href="${wallpaper.hd_url}" download class="card-link download">
-                                    ⬇️ 下载
-                                </a>
-                            </div>
+                const wallpaper = wallpapers[0];
+
+                // 设置背景图片
+                bgContainer.innerHTML = `<img src="${wallpaper.hd_url || wallpaper.image_url}" alt="${wallpaper.title}" />`;
+
+                // 更新标题
+                subtitle.textContent = wallpaper.title || '今日背景';
+
+                // 设置内容
+                mainContent.innerHTML = `
+                    <div class="info-box">
+                        <h2>${escapeHtml(wallpaper.title)}</h2>
+                        <p>${escapeHtml(wallpaper.description)}</p>
+                        <p class="date-display">📅 ${formatDate(wallpaper.date)}</p>
+                        <div class="controls" style="margin-top: 20px;">
+                            <a href="${wallpaper.image_url}" target="_blank" class="btn">
+                                👁️ 查看图片
+                            </a>
+                            <a href="${wallpaper.hd_url}" download class="btn primary">
+                                ⬇️ 下载高清
+                            </a>
                         </div>
                     </div>
-                `).join('');
+                `;
+
+                // 预加载图片
+                const img = new Image();
+                img.src = wallpaper.hd_url || wallpaper.image_url;
 
             } catch (error) {
                 console.error('加载失败:', error);
-                errorContainer.innerHTML = `
-                    <div class="error">
-                        ⚠️ 加载失败: ${error.message}
-                        <br/>
-                        <small>请确保 data/wallpaper.json 文件存在</small>
-                    </div>
-                `;
-                gallery.innerHTML = `
-                    <div class="empty-state" style="grid-column: 1 / -1;">
-                        <p>加载失败，请检查数据文件</p>
+                subtitle.textContent = '加载失败';
+
+                mainContent.innerHTML = `
+                    <div class="error-message">
+                        <p>⚠️ 加载失败</p>
+                        <p style="font-size: 0.9em; margin-top: 8px;">${error.message}</p>
+                        <button class="btn" onclick="loadWallpaper()" style="margin-top: 15px; color: #667eea;">
+                            🔄 重试
+                        </button>
                     </div>
                 `;
             }
@@ -366,7 +376,7 @@
         }
 
         // 页面加载时获取数据
-        loadWallpapers();
+        loadWallpaper();
     </script>
 </body>
 

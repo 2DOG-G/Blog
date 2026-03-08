@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bing 每日一图</title>
+    <title>Daily Wallpaper</title>
     <style>
         * {
             margin: 0;
@@ -20,362 +20,42 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #000;
         }
 
-        .background-container {
+        img {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            z-index: -1;
-        }
-
-        .background-container img {
-            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(2px);
-            z-index: 1;
-        }
-
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            padding: 40px 20px;
-            z-index: 2;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        header p {
-            font-size: 1.3em;
-            opacity: 0.95;
-            margin-bottom: 20px;
-        }
-
-        .info-box {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 20px 30px;
-            max-width: 500px;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        .info-box h2 {
-            font-size: 1.4em;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .info-box p {
-            font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            opacity: 0.9;
-        }
-
-        .info-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            background: rgba(255, 255, 255, 0.9);
-            color: #667eea;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-
-        .btn:hover {
-            background: white;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn.primary {
-            background: rgba(102, 126, 234, 0.9);
-            color: white;
-        }
-
-        .btn.primary:hover {
-            background: rgba(102, 126, 234, 1);
-        }
-
-        footer {
-            text-align: center;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85em;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            border: 3px solid rgba(102, 126, 234, 0.3);
-            border-top-color: #667eea;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .error-message {
-            background: rgba(255, 107, 107, 0.9);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            text-align: center;
-            max-width: 400px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .date-display {
-            font-size: 1.1em;
-            opacity: 0.95;
-            margin-top: 10px;
-            font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2em;
-            }
-
-            header p {
-                font-size: 1em;
-            }
-
-            .info-box {
-                max-width: 90%;
-                padding: 15px 20px;
-            }
-
-            .info-box h2 {
-                font-size: 1.1em;
-            }
-
-            .info-box p {
-                font-size: 0.85em;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-
-            .controls {
-                gap: 10px;
-            }
-
-            .container {
-                padding: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-
-            header p {
-                font-size: 0.9em;
-            }
-
-            .info-box {
-                padding: 12px 15px;
-            }
-
-            .btn {
-                padding: 8px 16px;
-                font-size: 0.8em;
-            }
-        }
-
-        .loading-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            display: block;
         }
     </style>
 </head>
 
 <body>
-    <div class="background-container" id="bgContainer">
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
-    </div>
-    <div class="overlay"></div>
-
-    <div class="container">
-        <header>
-            <h1>🖼️ Bing 每日一图</h1>
-            <p id="subtitle">加载中...</p>
-        </header>
-
-        <main id="mainContent"
-            style="flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-            <div class="loading-state">
-                <div class="spinner"></div>
-                <p>正在加载今天的图片...</p>
-            </div>
-        </main>
-
-        <footer>
-            <p>© 2024 Bing Daily Wallpaper | 数据来源：微软 Bing</p>
-            <p style="margin-top: 8px;">每天 UTC 0:00 (北京时间 08:00) 自动更新</p>
-        </footer>
-    </div>
-
+    <img id="bgImg" src="" alt="" />
     <script>
         async function loadWallpaper() {
-            const mainContent = document.getElementById('mainContent');
-            const bgContainer = document.getElementById('bgContainer');
-            const subtitle = document.getElementById('subtitle');
-
             try {
                 const response = await fetch('data/wallpaper.json');
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error('Failed to load data');
 
                 const wallpapers = await response.json();
-
-                if (!wallpapers || wallpapers.length === 0) {
-                    throw new Error('暂无数据');
-                }
+                if (!wallpapers || wallpapers.length === 0) throw new Error('No data');
 
                 const wallpaper = wallpapers[0];
+                const imgUrl = wallpaper['4k_url'] || wallpaper.hd_url || wallpaper.image_url;
 
-                // 设置背景图片
-                bgContainer.innerHTML = `<img src="${wallpaper.hd_url || wallpaper.image_url}" alt="${wallpaper.title}" />`;
-
-                // 更新标题
-                subtitle.textContent = wallpaper.title || '今日背景';
-
-                // 设置内容
-                mainContent.innerHTML = `
-                    <div class="info-box">
-                        <h2>${escapeHtml(wallpaper.title)}</h2>
-                        <p>${escapeHtml(wallpaper.description)}</p>
-                        <p class="date-display">📅 ${formatDate(wallpaper.date)}</p>
-                        <div class="controls" style="margin-top: 20px;">
-                            <a href="${wallpaper.image_url}" target="_blank" class="btn">
-                                👁️ 查看图片
-                            </a>
-                            <a href="${wallpaper.hd_url}" download class="btn primary">
-                                ⬇️ 下载高清
-                            </a>
-                        </div>
-                    </div>
-                `;
-
-                // 预加载图片
-                const img = new Image();
-                img.src = wallpaper.hd_url || wallpaper.image_url;
-
+                document.getElementById('bgImg').src = imgUrl;
             } catch (error) {
-                console.error('加载失败:', error);
-                subtitle.textContent = '加载失败';
-
-                mainContent.innerHTML = `
-                    <div class="error-message">
-                        <p>⚠️ 加载失败</p>
-                        <p style="font-size: 0.9em; margin-top: 8px;">${error.message}</p>
-                        <button class="btn" onclick="loadWallpaper()" style="margin-top: 15px; color: #667eea;">
-                            🔄 重试
-                        </button>
-                    </div>
-                `;
+                console.error('Error:', error);
+                document.body.style.background = '#1a1a1a';
             }
         }
 
-        function formatDate(dateStr) {
-            if (!dateStr) return '日期未知';
-            const year = dateStr.slice(0, 4);
-            const month = dateStr.slice(4, 6);
-            const day = dateStr.slice(6, 8);
-            return `${year}年${month}月${day}日`;
-        }
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#039;'
-            };
-            return text.replace(/[&<>"']/g, m => map[m]);
-        }
-
-        // 页面加载时获取数据
         loadWallpaper();
     </script>
 </body>

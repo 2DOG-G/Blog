@@ -22,11 +22,18 @@ def fetch_bing_wallpaper():
         # 提取图片信息
         wallpapers = []
         for image in data.get('images', []):
+            url = image.get('url', '')
+            # 生成4K/UHD版本的URL
+            uhd_url = url.replace('_1080x1920', '_UHD').replace('_1920x1080', '_UHD')
+            # Bing 4K URL格式: 使用更高分辨率
+            image_4k_url = uhd_url if '_UHD' in uhd_url else url + '&w=3840&h=2160'
+            
             wallpaper = {
                 'title': image.get('title', ''),
                 'description': image.get('copyright', ''),
-                'image_url': f"https://www.bing.com{image.get('url', '')}",
-                'hd_url': f"https://www.bing.com{image.get('url', '').replace('_1080x1920', '_UHD')}",
+                'image_url': f"https://www.bing.com{url}",
+                'hd_url': f"https://www.bing.com{uhd_url}",
+                '4k_url': f"https://www.bing.com{image_4k_url}",
                 'date': image.get('startdate', ''),
                 'fetch_time': datetime.now().isoformat()
             }
